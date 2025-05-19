@@ -5,5 +5,5 @@ public enum GameFormat {
     DUO,
     TRIO,
     SQUAD,
-    TEAM
+    ELIMINATION, TEAM
 }
