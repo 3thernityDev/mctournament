@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Add Player</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="minecraft-card">
+        <div class="minecraft-card-header">Add Player</div>
+        <div class="minecraft-card-body">
+            <form th:action="@{/api/players}" method="post" class="minecraft-form">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="minecraftId">Minecraft ID</label>
+                    <input type="text" id="minecraftId" name="minecraftId" class="form-control" required />
+                    <small>This is the player's in-game username</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="discordId">Discord ID</label>
+                    <input type="text" id="discordId" name="discordId" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="country">Country</label>
+                    <input type="text" id="country" name="country" class="form-control" />
+                </div>
+                <div style="text-align: right;">
+                    <a th:href="@{/players}" class="minecraft-btn">Cancel</a>
+                    <button type="submit" class="minecraft-btn success">Add Player</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

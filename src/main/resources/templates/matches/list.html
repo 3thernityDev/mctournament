@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Matches</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="minecraft-card">
+        <div class="minecraft-card-header">Matches</div>
+        <div class="minecraft-card-body">
+            <div style="margin-bottom: 20px; text-align: right;">
+                <a th:href="@{/matches/create}" class="minecraft-btn success">Create Match</a>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="tournamentFilter">Filter by Tournament:</label>
+                <select id="tournamentFilter" class="form-control" onchange="filterByTournament(this.value)">
+                    <option value="">All Tournaments</option>
+                    <option th:each="tournament : ${tournaments}"
+                            th:value="${tournament.id}"
+                            th:text="${tournament.name}"
+                            th:selected="${selectedTournament != null && selectedTournament.id == tournament.id}">
+                        Tournament Name
+                    </option>
+                </select>
+            </div>
+
+            <div th:if="${#lists.isEmpty(matches)}">
+                <p>No matches found.</p>
+            </div>
+
+            <table th:unless="${#lists.isEmpty(matches)}" class="minecraft-table">
+                <thead>
+                <tr>
+                    <th>Tournament</th>
+                    <th>Game</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="match : ${matches}">
+                    <td th:text="${match.tournament?.name}">Tournament Name</td>
+                    <td th:text="${match.game?.name}">Game Name</td>
+                    <td th:text="${#temporals.format(match.matchDate, 'dd-MM-yyyy')}">01-01-2025</td>
+                    <td th:text="${match.status}">SCHEDULED</td>
+                    <td>
+                        <a th:href="@{/matches/{id}(id=${match.id})}" class="minecraft-btn">View</a>
+                        <a th:href="@{/matches/{id}/edit(id=${match.id})}" class="minecraft-btn warning">Edit</a>
+                        <a th:href="@{/matches/{id}/delete(id=${match.id})}" class="minecraft-btn danger"
+                           onclick="return confirm('Are you sure you want to delete this match?');">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<th:block layout:fragment="scripts">
+    <script>
+        function filterByTournament(tournamentId) {
+            if (tournamentId) {
+                window.location.href = "/matches?tournamentId=" + tournamentId;
+            } else {
+                window.location.href = "/matches";
+            }
+        }
+    </script>
+</th:block>
+</body>
+</html>

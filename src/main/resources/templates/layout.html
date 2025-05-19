@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">MC Tournament</title>
+  <link rel="stylesheet" th:href="@{/css/minecraft-style.css}" />
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/minecraft-4" />
+  <th:block layout:fragment="css"></th:block>
+</head>
+<body>
+<header class="minecraft-header">
+  <div class="minecraft-logo">
+    <span style="color: var(--mc-diamond);">M</span><span style="color: var(--mc-gold);">C</span>
+    <span style="color: var(--mc-emerald);">T</span><span style="color: var(--mc-redstone);">o</span><span style="color: var(--mc-grass);">u</span><span style="color: var(--mc-water);">r</span><span style="color: var(--mc-diamond);">n</span><span style="color: var(--mc-gold);">a</span><span style="color: var(--mc-emerald);">m</span><span style="color: var(--mc-redstone);">e</span><span style="color: var(--mc-grass);">n</span><span style="color: var(--mc-water);">t</span>
+  </div>
+</header>
+
+<nav class="minecraft-nav">
+  <ul>
+    <li><a th:href="@{/}">Home</a></li>
+    <li><a th:href="@{/tournaments}">Tournaments</a></li>
+    <li><a th:href="@{/matches}">Matches</a></li>
+    <li><a th:href="@{/players}">Players</a></li>
+    <li><a th:href="@{/games}">Games</a></li>
+    <li><a th:href="@{/gamemodes}">Gamemodes</a></li>
+    <li><a th:href="@{/users}">Users</a></li>
+    <li><a th:href="@{/scores}">Scores</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div th:if="${successMessage}" class="minecraft-alert success" th:text="${successMessage}"></div>
+  <div th:if="${errorMessage}" class="minecraft-alert danger" th:text="${errorMessage}"></div>
+
+  <main layout:fragment="content">
+    <!-- Page content will be inserted here -->
+  </main>
+</div>
+
+<footer class="minecraft-footer">
+  <div class="container">
+    <p>&copy; 2025 MC Tournament | Minecraft is a registered trademark of Mojang AB</p>
+  </div>
+</footer>
+
+<th:block layout:fragment="scripts"></th:block>
+</body>
+</html>

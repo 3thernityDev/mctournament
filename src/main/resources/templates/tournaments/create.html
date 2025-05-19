@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Create Tournament</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="minecraft-card">
+        <div class="minecraft-card-header">Create Tournament</div>
+        <div class="minecraft-card-body">
+            <form th:action="@{/api/tournaments}" method="post" class="minecraft-form">
+                <div class="form-group">
+                    <label class="form-label" for="name">Tournament Name</label>
+                    <input type="text" id="name" name="name" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea id="description" name="description" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="startDate">Start Date</label>
+                    <input type="date" id="startDate" name="startDate" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="endDate">End Date</label>
+                    <input type="date" id="endDate" name="endDate" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="maxPlayers">Max Players</label>
+                    <input type="number" id="maxPlayers" name="maxPlayers" class="form-control" value="32" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="status">Status</label>
+                    <select id="status" name="status" class="form-control" required>
+                        <option value="UPCOMING">Upcoming</option>
+                        <option value="ONGOING">Ongoing</option>
+                        <option value="COMPLETED">Completed</option>
+                        <option value="CANCELLED">Cancelled</option>
+                    </select>
+                </div>
+                <div style="text-align: right;">
+                    <a th:href="@{/tournaments}" class="minecraft-btn">Cancel</a>
+                    <button type="submit" class="minecraft-btn success">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

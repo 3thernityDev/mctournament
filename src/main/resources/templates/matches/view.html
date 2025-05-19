@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Match Details</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="minecraft-card">
+        <div class="minecraft-card-header">
+            Match Details
+            <span th:if="${match.tournament}" th:text="'- ' + ${match.tournament.name}" style="font-size: 0.9em;">- Tournament Name</span>
+        </div>
+        <div class="minecraft-card-body">
+            <div class="minecraft-alert info" th:text="${match.status}">SCHEDULED</div>
+
+            <div style="margin: 20px 0;">
+                <p><strong>Game:</strong> <span th:text="${match.game?.name}">Game Name</span></p>
+                <p><strong>Date:</strong> <span th:text="${#temporals.format(match.matchDate, 'dd MMMM yyyy HH:mm')}">01 January 2025 15:00</span></p>
+                <p><strong>Location:</strong> <span th:text="${match.location ?: 'TBD'}">Hypixel Server</span></p>
+            </div>
+
+            <div style="margin: 20px 0; text-align: right;">
+                <a th:href="@{/matches/{id}/edit(id=${match.id})}" class="minecraft-btn warning">Edit</a>
+                <a th:if="${match.status == 'SCHEDULED'}" th:href="@{/matches/{id}/start(id=${match.id})}" class="minecraft-btn primary">Start Match</a>
+                <a th:if="${match.status == 'ONGOING'}" th:href="@{/matches/{id}/complete(id=${match.id})}" class="minecraft-btn success">Complete Match</a>
+                <a th:href="@{/matches/{id}/delete(id=${match.id})}" class="minecraft-btn danger"
+                   onclick="return confirm('Are you sure you want to delete this match?');">Delete</a>
+            </div>
+
+            <h3>Participants</h3>
+            <div th:if="${#lists.isEmpty(match.players)}">
+                <p>No players registered for this match yet.</p>
+                <a th:href="@{/matches/{id}/add-players(id=${match.id})}" class="minecraft-btn success">Add Players</a>
+            </div>
+
+            <table th:unless="${#lists.isEmpty(match.players)}" class="minecraft-table">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Minecraft ID</th>
+                    <th>Team</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="player : ${match.players}">
+                    <td th:text="${player.username}">PlayerName</td>
+                    <td th:text="${player.minecraftId}">mc_id</td>
+                    <td th:text="${player.team ?: 'N/A'}">Red Team</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3>Results & Scores</h3>
+            <div th:if="${match.status != 'COMPLETED'}">
+                <p>Match results will be available after the match is completed.</p>
+            </div>
+
+            <div th:if="${match.status == 'COMPLETED'}">
+                <div th:if="${#lists.isEmpty(match.scores)}">
+                    <p>No scores recorded for this match.</p>
+                    <a th:href="@{/scores/create?matchId={id}(id=${match.id})}" class="minecraft-btn success">Add Scores</a>
+                </div>
+
+                <table th:unless="${#lists.isEmpty(match.scores)}" class="minecraft-table">
+                    <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Score</th>
+                        <th>Rank</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="score : ${match.scores}">
+                        <td th:text="${score.player?.username}">PlayerName</td>
+                        <td th:text="${score.value}">100</td>
+                        <td th:text="${score.rank}">1</td>
+                        <td>
+                            <a th:href="@{/scores/{id}/edit(id=${score.id})}" class="minecraft-btn warning">Edit</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
