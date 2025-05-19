@@ -23,7 +23,7 @@ public class MinecraftGame {
 
     private int averageMatchDuration;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name = "game_id")
     private List<Gamemode> availableModes = new ArrayList<>();
 
