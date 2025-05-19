@@ -1,3 +1,4 @@
+// Mise à jour de la classe User pour ajouter le rôle
 package re.ethernitydev.mctournament.model;
 
 import jakarta.persistence.*;
@@ -7,17 +8,25 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-public class User  implements Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String username;
+
+    @Column(unique = true)
     private String email;
+
     private String password;
 
     private LocalDateTime registrationDate;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.USER;  // Valeur par défaut
 
     // Getters & Setters
 
@@ -59,5 +68,13 @@ public class User  implements Serializable {
 
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }
