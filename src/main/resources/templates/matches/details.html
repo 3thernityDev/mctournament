@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Match Details</title></head>
+<body>
+<h1 th:text="${match.game?.name}">Game Name</h1>
+<p>Date: <span th:text="${#temporals.format(match.matchDate, 'dd-MM-yyyy')}">01-01-2025</span></p>
+<p>Status: <span th:text="${match.status}">Scheduled</span></p>
+</body>
+</html>

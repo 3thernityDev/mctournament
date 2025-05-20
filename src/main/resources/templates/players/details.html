@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Player Details</title></head>
+<body>
+<h1 th:text="${player.username}">Player Name</h1>
+<p>Minecraft ID: <span th:text="${player.minecraftId}">mc_id</span></p>
+<p>Registered on: <span th:text="${#temporals.format(player.registrationDate, 'dd-MM-yyyy')}">01-01-2025</span></p>
+</body>
+</html>

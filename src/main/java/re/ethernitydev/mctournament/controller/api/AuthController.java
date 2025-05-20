@@ -1,4 +1,4 @@
-package re.ethernitydev.mctournament.controller;
+package re.ethernitydev.mctournament.controller.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
