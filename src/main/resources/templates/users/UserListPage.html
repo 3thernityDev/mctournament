@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des Utilisateurs</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="minecraft-header">
+            <h1>Liste des Utilisateurs</h1>
+        </header>
+
+        <nav class="minecraft-nav">
+            <ul>
+                <li><a th:href="@{/}">Accueil</a></li>
+                <li><a th:href="@{/users/new}" class="minecraft-btn primary">Nouveau Utilisateur</a></li>
+            </ul>
+        </nav>
+
+        <div class="minecraft-card">
+            <div class="minecraft-card-body">
+                <table class="minecraft-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom d'utilisateur</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td>
+                                <a th:href="@{/users/{id}(id=${user.id})}" class="minecraft-btn">Voir</a>
+                                <a th:href="@{/users/{id}/delete(id=${user.id})}" class="minecraft-btn danger" 
+                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

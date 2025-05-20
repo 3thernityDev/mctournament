@@ -1,0 +1,17 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: minecraft_mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: minecraft_tournaments
+      MARIADB_USER: minecraft_user
+      MARIADB_PASSWORD: userpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:
