@@ -1,9 +1,9 @@
-
 package re.ethernitydev.mctournament.service;
 
 import org.springframework.stereotype.Service;
 import re.ethernitydev.mctournament.model.Tournament;
 import re.ethernitydev.mctournament.repository.TournamentRepository;
+import re.ethernitydev.mctournament.model.TournamentStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,5 +30,10 @@ public class TournamentService {
 
     public void deleteTournament(Long id) {
         tournamentRepository.deleteById(id);
+    }
+
+    public void createTournament(Tournament tournament) {
+        tournament.setStatus(TournamentStatus.PENDING);
+        tournamentRepository.save(tournament);
     }
 }
