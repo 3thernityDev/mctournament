@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">MC Tournament</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+<header class="minecraft-header">
+    <div class="minecraft-logo">
+        <span>MC Tournament</span>
+    </div>
+    <nav class="minecraft-nav">
+        <ul>
+            <li><a th:href="@{/}" th:classappend="${activeTab == 'home' ? 'active' : ''}">Accueil</a></li>
+            <li><a th:href="@{/tournaments}" th:classappend="${activeTab == 'tournaments' ? 'active' : ''}">Tournois</a>
+            </li>
+            <li><a th:href="@{/gamemodes}" th:classappend="${activeTab == 'gamemodes' ? 'active' : ''}">Modes de jeu</a>
+            </li>
+            <li><a th:href="@{/leaderboard}"
+                   th:classappend="${activeTab == 'leaderboard' ? 'active' : ''}">Classement</a></li>
+            <li><a th:href="@{/users}" th:classappend="${activeTab == 'users' ? 'active': ''}">Utilisateurs</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <main layout:fragment="content">
+        <!-- Le contenu de la page sera injecté ici -->
+    </main>
+</div>
+
+<footer class="minecraft-footer">
+    <p>&copy; 2024 MC Tournament. Tous droits réservés.</p>
+</footer>
+</body>
+</html>

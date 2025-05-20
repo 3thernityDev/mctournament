@@ -1,50 +1,56 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/main}">>
 <head>
     <title>Détails du Tournoi</title>
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
-    <div class="container">
-        <header class="minecraft-header">
-            <h1>Détails du Tournoi</h1>
-        </header>
+<div class="container">
+    <header class="minecraft-header">
+        <h1>Détails du Tournoi</h1>
+    </header>
 
-        <nav class="minecraft-nav">
-            <ul>
-                <li><a th:href="@{/tournaments}">Retour à la liste</a></li>
-            </ul>
-        </nav>
+    <nav class="minecraft-nav">
+        <ul>
+            <li><a th:href="@{/tournaments}">Retour à la liste</a></li>
+        </ul>
+    </nav>
 
-        <div class="minecraft-card">
-            <div class="minecraft-card-header">
-                <h2 th:text="${tournament.name}"></h2>
+    <div class="minecraft-card" layout:fragment="content">
+        <div class="minecraft-card-header">
+            <h2 th:text="${tournament.name}"></h2>
+        </div>
+        <div class="minecraft-card-body">
+            <div class="block-details">
+                <p><strong>ID:</strong> <span th:text="${tournament.id}"></span></p>
+                <p><strong>Description:</strong> <span th:text="${tournament.description}"></span></p>
+                <p><strong>Date de début:</strong> <span
+                        th:text="${#temporals.format(tournament.startDate, 'dd-MM-yyyy HH:mm')}"></span></p>
+                <p><strong>Date de fin:</strong> <span
+                        th:text="${#temporals.format(tournament.endDate, 'dd-MM-yyyy HH:mm')}"></span></p>
+                <p><strong>Statut:</strong> <span th:text="${tournament.status}"></span></p>
+                <p><strong>Jeu:</strong> <span th:text="${tournament.game.name}"></span></p>
+                <p><strong>Mode de jeu:</strong> <span th:text="${tournament.gamemode.name}"></span></p>
+                <p><strong>Nombre max. de participants:</strong> <span th:text="${tournament.maxParticipants}"></span>
+                </p>
+                <p><strong>Nombre de matchs:</strong> <span th:text="${tournament.matches.size()}"></span></p>
             </div>
-            <div class="minecraft-card-body">
-                <div class="block-details">
-                    <p><strong>ID:</strong> <span th:text="${tournament.id}"></span></p>
-                    <p><strong>Description:</strong> <span th:text="${tournament.description}"></span></p>
-                    <p><strong>Date de début:</strong> <span th:text="${#temporals.format(tournament.startDate, 'dd-MM-yyyy HH:mm')}"></span></p>
-                    <p><strong>Date de fin:</strong> <span th:text="${#temporals.format(tournament.endDate, 'dd-MM-yyyy HH:mm')}"></span></p>
-                    <p><strong>Statut:</strong> <span th:text="${tournament.status}"></span></p>
-                    <p><strong>Jeu:</strong> <span th:text="${tournament.game.name}"></span></p>
-                    <p><strong>Mode de jeu:</strong> <span th:text="${tournament.gamemode.name}"></span></p>
-                    <p><strong>Nombre max. de participants:</strong> <span th:text="${tournament.maxParticipants}"></span></p>
-                    <p><strong>Nombre de matchs:</strong> <span th:text="${tournament.matches.size()}"></span></p>
-                </div>
 
-                <div class="matches-list" th:if="${tournament.matches.size() > 0}">
-                    <h3>Matchs</h3>
-                    <ul>
-                        <li th:each="match : ${tournament.matches}" th:text="${match.name}"></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="minecraft-card-footer">
-                <a th:href="@{/tournaments/{id}/delete(id=${tournament.id})}" class="minecraft-btn danger"
-                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce tournoi ?')">Supprimer</a>
+            <div class="matches-list" th:if="${tournament.matches.size() > 0}">
+                <h3>Matchs</h3>
+                <ul>
+                    <li th:each="match : ${tournament.matches}" th:text="${match.name}"></li>
+                </ul>
             </div>
         </div>
+        <div class="minecraft-card-footer">
+            <a th:href="@{/tournaments/{id}/delete(id=${tournament.id})}" class="minecraft-btn danger"
+               onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce tournoi ?')">Supprimer</a>
+        </div>
     </div>
+</div>
 </body>
 </html>

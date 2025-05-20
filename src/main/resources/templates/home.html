@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+
+    <title>Accueil</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="minecraft-welcome">
+            <h2>Bienvenue sur MC Tournament</h2>
+            <p>La plateforme de gestion de tournois Minecraft</p>
+        </div>
+
+        <div class="minecraft-cards">
+            <div class="minecraft-card">
+                <h3>Tournois</h3>
+                <p>Découvrez les tournois en cours et à venir</p>
+                <div class="minecraft-card-footer">
+                    <a th:href="@{/tournaments}" class="minecraft-btn primary">Explorer</a>
+                </div>
+            </div>
+
+            <div class="minecraft-card">
+                <h3>Modes de jeu</h3>
+                <p>Consultez les différents modes de jeu disponibles</p>
+                <div class="minecraft-card-footer">
+                    <a th:href="@{/gamemodes}" class="minecraft-btn primary">Découvrir</a>
+                </div>
+            </div>
+
+            <div class="minecraft-card">
+                <h3>Classement</h3>
+                <p>Consultez le classement des meilleurs joueurs</p>
+                <div class="minecraft-card-footer">
+                    <a th:href="@{/leaderboard}" class="minecraft-btn primary">Voir le classement</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

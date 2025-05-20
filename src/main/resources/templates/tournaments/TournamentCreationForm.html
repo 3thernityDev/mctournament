@@ -1,88 +1,93 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/main}">>
 <head>
     <title>Créer un Tournoi</title>
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
-    <div class="container">
-        <header class="minecraft-header">
-            <h1>Créer un Tournoi</h1>
-        </header>
+<div class="container">
+    <header class="minecraft-header">
+        <h1>Créer un Tournoi</h1>
+    </header>
 
-        <nav class="minecraft-nav">
-            <ul>
-                <li><a th:href="@{/tournaments}">Retour à la liste</a></li>
-            </ul>
-        </nav>
+    <nav class="minecraft-nav">
+        <ul>
+            <li><a th:href="@{/tournaments}">Retour à la liste</a></li>
+        </ul>
+    </nav>
 
-        <div class="minecraft-form">
-            <form th:action="@{/tournaments}" th:object="${tournament}" method="post">
-                <input type="hidden" th:field="*{id}" />
-                
-                <div class="form-group">
-                    <label class="form-label" for="name">Nom du tournoi</label>
-                    <input type="text" class="form-control" id="name" th:field="*{name}" required />
-                </div>
+    <div class="minecraft-form" layout:fragment="content">
+        <form th:action="@{/tournaments}" th:object="${tournament}" method="post">
+            <input type="hidden" th:field="*{id}"/>
 
-                <div class="form-group">
-                    <label class="form-label" for="description">Description</label>
-                    <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="name">Nom du tournoi</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" required/>
+            </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="startDate">Date de début</label>
-                    <input type="datetime-local" class="form-control" id="startDate" th:field="*{startDate}" required />
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+            </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="endDate">Date de fin</label>
-                    <input type="datetime-local" class="form-control" id="endDate" th:field="*{endDate}" required />
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="startDate">Date de début</label>
+                <input type="datetime-local" class="form-control" id="startDate" th:field="*{startDate}" required/>
+            </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="maxParticipants">Nombre maximum de participants</label>
-                    <input type="number" class="form-control" id="maxParticipants" th:field="*{maxParticipants}" required />
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="endDate">Date de fin</label>
+                <input type="datetime-local" class="form-control" id="endDate" th:field="*{endDate}" required/>
+            </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="game">Jeu</label>
-                    <select class="form-control" id="game" th:field="*{game}" required>
-                        <option value="">Sélectionnez un jeu</option>
-                        <option th:each="game : ${games}" th:value="${game.id}" th:text="${game.name}"></option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="maxParticipants">Nombre maximum de participants</label>
+                <input type="number" class="form-control" id="maxParticipants" th:field="*{maxParticipants}" required/>
+            </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="gameMode">Mode de jeu</label>
-                    <select class="form-control" id="gameMode" th:field="*{gamemode}" required>
-                        <option value="">Sélectionnez un mode de jeu</option>
-                        <option th:each="gameMode : ${gameModes}" th:value="${gameMode.id}" th:text="${gameMode.name}"></option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="game">Jeu</label>
+                <select class="form-control" id="game" th:field="*{game}" required>
+                    <option value="">Sélectionnez un jeu</option>
+                    <option th:each="game : ${games}" th:value="${game.id}" th:text="${game.name}"></option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="tournamentType">Type de tournoi</label>
-                    <select class="form-control" id="tournamentType" name="tournamentType" required>
-                        <option value="">Sélectionnez un type de tournoi</option>
-                        <option th:each="type : ${tournamentTypes}" 
-                th:value="${type}" 
-                th:text="${type.displayName}">
-        </option>
-    </select>
-</div>
+            <div class="form-group">
+                <label class="form-label" for="gameMode">Mode de jeu</label>
+                <select class="form-control" id="gameMode" th:field="*{gamemode}" required>
+                    <option value="">Sélectionnez un mode de jeu</option>
+                    <option th:each="gameMode : ${gameModes}" th:value="${gameMode.id}"
+                            th:text="${gameMode.name}"></option>
+                </select>
+            </div>
 
-<div class="form-group" th:if="${tournament instanceof T(re.ethernitydev.mctournament.model.SingleEliminationTournament)}">
-    <label class="form-label" for="hasThirdPlaceMatch">Match pour la 3ème place</label>
-    <input type="checkbox" class="form-control" id="hasThirdPlaceMatch" th:field="*{hasThirdPlaceMatch}" />
-</div>
+            <div class="form-group">
+                <label class="form-label" for="tournamentType">Type de tournoi</label>
+                <select class="form-control" id="tournamentType" name="tournamentType" required>
+                    <option value="">Sélectionnez un type de tournoi</option>
+                    <option th:each="type : ${tournamentTypes}"
+                            th:value="${type}"
+                            th:text="${type.displayName}">
+                    </option>
+                </select>
+            </div>
 
-                <div class="minecraft-card-footer">
-                    <button type="submit" class="minecraft-btn primary">Créer le tournoi</button>
-                    <a th:href="@{/tournaments}" class="minecraft-btn">Annuler</a>
-                </div>
-            </form>
-        </div>
+            <div class="form-group"
+                 th:if="${tournament instanceof T(re.ethernitydev.mctournament.model.SingleEliminationTournament)}">
+                <label class="form-label" for="hasThirdPlaceMatch">Match pour la 3ème place</label>
+                <input type="checkbox" class="form-control" id="hasThirdPlaceMatch" th:field="*{hasThirdPlaceMatch}"/>
+            </div>
+
+            <div class="minecraft-card-footer">
+                <button type="submit" class="minecraft-btn primary">Créer le tournoi</button>
+                <a th:href="@{/tournaments}" class="minecraft-btn">Annuler</a>
+            </div>
+        </form>
     </div>
+</div>
 </body>
 </html>

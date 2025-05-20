@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
 <head>
     <title>Liste des Tournois</title>
     <link rel="stylesheet" th:href="@{/css/index.css}">
+
 </head>
 <body>
-    <div class="container">
+    <div class="container" layout:fragment="content">
         <header class="minecraft-header">
             <h1>Liste des Tournois</h1>
         </header>
 
         <nav class="minecraft-nav">
             <ul>
-                <li><a th:href="@{/}">Accueil</a></li>
                 <li><a th:href="@{/tournaments/new}" class="minecraft-btn primary">Nouveau Tournoi</a></li>
             </ul>
         </nav>

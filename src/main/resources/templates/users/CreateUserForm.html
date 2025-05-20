@@ -1,46 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}"
+>
 <head>
     <title>Créer un Utilisateur</title>
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
-    <div class="container">
-        <header class="minecraft-header">
-            <h1>Créer un Utilisateur</h1>
-        </header>
+<div class="container" layout:fragment="content">
+    <header class="minecraft-header">
+        <h1>Créer un Utilisateur</h1>
+    </header>
 
-        <nav class="minecraft-nav">
-            <ul>
-                <li><a th:href="@{/users}">Retour à la liste</a></li>
-            </ul>
-        </nav>
+    <nav class="minecraft-nav">
+        <ul>
+            <li><a th:href="@{/users}">Retour à la liste</a></li>
+        </ul>
+    </nav>
 
-        <div class="minecraft-form">
-            <form th:action="@{/users}" th:object="${user}" method="post">
-                <input type="hidden" th:field="*{id}" />
-                
-                <div class="form-group">
-                    <label class="form-label" for="username">Nom d'utilisateur</label>
-                    <input type="text" class="form-control" id="username" th:field="*{username}" required />
-                </div>
+    <div class="minecraft-form">
+        <form th:action="@{/users}" th:object="${user}" method="post">
+            <input type="hidden" th:field="*{id}"/>
 
-                <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
-                    <input type="email" class="form-control" id="email" th:field="*{email}" required />
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="username">Nom d'utilisateur</label>
+                <input type="text" class="form-control" id="username" th:field="*{username}" required/>
+            </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="password">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" th:field="*{password}" required />
-                </div>
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required/>
+            </div>
 
-                <div class="minecraft-card-footer">
-                    <button type="submit" class="minecraft-btn primary">Enregistrer</button>
-                    <a th:href="@{/users}" class="minecraft-btn">Annuler</a>
-                </div>
-            </form>
-        </div>
+            <div class="form-group">
+                <label class="form-label" for="password">Mot de passe</label>
+                <input type="password" class="form-control" id="password" th:field="*{password}" required/>
+            </div>
+
+            <div class="minecraft-card-footer">
+                <button type="submit" class="minecraft-btn primary">Enregistrer</button>
+                <a th:href="@{/users}" class="minecraft-btn">Annuler</a>
+            </div>
+        </form>
     </div>
+</div>
 </body>
 </html>
